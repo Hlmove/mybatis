@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hlmove.mybatis04.mapper.extend.ShopCarExtendMapper">
+    <cache/>
+    <resultMap id="BooksByUserIdResult" type="bookShopCarExtend"
+               extends="com.hlmove.mybatis04.mapper.BookMapper.BaseBookResult">
+        <result column="num" property="num"/>
+    </resultMap>
+    <select id="findBooksByUserId" resultMap="BooksByUserIdResult">
+        select eb.*, es.num
+        from es_shopcar es,
+             es_book eb
+        where es.book_id = eb.id
+          and es.user_id = #{userId}
+    </select>
+    <!--结果查询，一个语句，多个resultMap-->
+    <resultMap id="UserByIdResult" type="userShopCarExtend">
+        <result column="uid" property="id"/>
+        <result column="username" property="username"/>
+        <collection property="books" resultMap="BooksByUserIdResult"/>
+    </resultMap>
+    <select id="findUserByIdResult" resultMap="UserByIdResult">
+        select eu.id uid, eu.username, eb.*, es.num
+        from es_book eb,
+             es_user eu,
+             es_shopcar es
+        where es.user_id = eu.id
+          and es.book_id = eb.id
+          and eu.id = #{userId}
+    </select>
+    <!--一对多查询 两个sql语句-->
+    <resultMap id="UserByIdSelect" type="userShopCarExtend">
+        <result column="uid" property="id"/>
+        <result column="username" property="username"/>
+        <collection column="id" property="books" select="findBooksByUserId"/>
+    </resultMap>
+    <select id="findUserByIdSelect" resultMap="UserByIdSelect">
+        select id, username
+        from es_user
+        where id = #{userId}
+    </select>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hlmove.mybatis04.mapper.BookMapper">
+    <cache/>
+    <!-- es_book表基础映射 -->
+    <resultMap id="BaseBookResult" type="book">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="cover" property="cover"/>
+        <result column="description" property="description"/>
+        <result column="author" property="author"/>
+        <result column="publisher" property="publisher"/>
+        <result column="price" property="price"/>
+        <result column="store_num" property="storeNum"/>
+        <result column="status" property="status"/>
+        <result column="category_id" property="categoryId"/>
+    </resultMap>
+    <select id="findAll" resultMap="BaseBookResult">
+        select *
+        from es_book
+    </select>
+</mapper>

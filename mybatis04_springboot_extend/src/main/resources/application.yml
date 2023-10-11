@@ -1,0 +1,13 @@
+mybatis:
+    configuration:
+        logimpl: org.apache.ibatis.logging.stdout.StdOutImpl
+        map-underscore-to-camel-case: false
+        cache-enabled: true  #开启二级缓存
+    mapper-locations: classpath:mapper/**/*.xml
+    type-aliases-package: com.hlmove.mybatis04.domian
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: env
+        url: jdbc:mysql://localhost:3306/test
+        username: env

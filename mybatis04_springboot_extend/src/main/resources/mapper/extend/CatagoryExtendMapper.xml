@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hlmove.mybatis04.mapper.extend.CategoryExtendMapper">
+    <cache/>
+    <!-- 二级图书类别 resultMap -->
+    <resultMap id="Category2Result" type="Category">
+        <id column="cid" property="id"/>
+        <result column="cname" property="name"/>
+        <result column="cdesc" property="description"/>
+        <result column="pid" property="parentId"/>
+    </resultMap>
+    <!-- 一对多 嵌套结果映射 -->
+    <resultMap id="CategoryExtendResult" type="CategoryExtend"
+               extends="com.hlmove.mybatis04.mapper.CategoryMapper.BaseCategoryResult">
+        <!-- 借助collection实现一对多嵌套结果映射
+        property： 需要映射的属性(成员对象)
+        resultMap： 属性(成员对象)映射的规则
+        -->
+        <collection property="categories"
+                    resultMap="Category2Result"/>
+    </resultMap>
+    <select id="findByIdWithResult"
+            resultMap="CategoryExtendResult">
+        select ec1.*,
+               ec2.id        cid,
+               ec2.name      cname,
+               ec2.description
+                             cdesc,
+               ec2.parent_id pid
+        from es_category ec1
+                 LEFT JOIN es_category ec2
+                           on ec1.id = ec2.parent_id
+        where ec1.id = #{cid}
+    </select>
+    <!--一对多嵌套查询-->
+    <resultMap id="CategoryExtendSelectResult" type="CategoryExtend"
+               extends="com.hlmove.mybatis04.mapper.CategoryMapper.BaseCategoryResult">
+        <collection property="categories" column="id"
+                    select="com.hlmove.mybatis04.mapper.CategoryMapper.findAllByParentId"
+        />
+    </resultMap>
+    <select id="findByIdWithSelect" resultMap="CategoryExtendSelectResult">
+        select
+        <include refid="com.hlmove.mybatis04.mapper.CategoryMapper.categorySql"/>
+        from es_category
+        where id = #{cid}
+    </select>
+</mapper>

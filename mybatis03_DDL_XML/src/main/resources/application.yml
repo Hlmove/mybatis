@@ -1,0 +1,20 @@
+spring:
+  datasource:
+#驱动类名称
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#数据库连接的url
+    url: jdbc:mysql://localhost:3306/test
+#用户名
+    username: env
+#密码
+    password: env
+mybatis:
+  configuration:
+#指定mybatis输出日志的位置, 输出控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#开启驼峰命名
+    map-underscore-to-camel-case: true
+#映射文件扫描
+  #classpath 等同于src/main/resource
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.hlmove.entity

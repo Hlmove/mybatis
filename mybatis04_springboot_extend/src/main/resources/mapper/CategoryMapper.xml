@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--通过namespace和其中的id定位sql语句-->
+<mapper namespace="com.hlmove.mybatis04.mapper.CategoryMapper">
+    <cache/>
+    <resultMap id="findCategoryById" type="category">
+        <!-- id标签,用来映射主键列 -->
+        <id column="id" property="id"/>
+        <!-- 其他列,就是使用result标签 -->
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+    </resultMap>
+    <sql id="categorySql">
+        id,name,description,parent_id
+    </sql>
+    <select id="findById" resultMap="findCategoryById">
+        select
+        <include refid="categorySql"/>
+        from es_category where id = #{id}
+    </select>
+
+
+    <resultMap id="findCategoryAll" type="Category" extends="findCategoryById">
+        <result column="parent_id" property="parentId"/>
+    </resultMap>
+    <select id="findAll" resultMap="findCategoryAll">
+        select *
+        from es_category
+    </select>
+
+
+    <!-- 基础resultMap定义 -->
+    <resultMap id="BaseCategoryResult" type="Category">
+        <!-- id标签,用来映射主键列 -->
+        <id column="id" property="id"/>
+        <!-- 其他列,就是使用result标签 -->
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+    </resultMap>
+    <select id="findById2" resultMap="BaseCategoryResult">
+        select id, name, description
+        from es_category
+        where id = #{cid}
+    </select>
+    <resultMap id="BaseCategoryResult2" type="Category"
+               extends="BaseCategoryResult">
+        <result column="parent_id" property="parentId"/>
+    </resultMap>
+    <select id="findById3" resultMap="BaseCategoryResult2">
+        select
+        <include refid="categorySql"/>
+        from es_category
+        where id = #{cid}
+    </select>
+
+    <select id="findAllByParentId" resultMap="BaseCategoryResult2">
+        select
+        <include refid="categorySql"/>
+        from es_category
+        where parent_id = #{id}
+    </select>
+    <!--用于BookExtend查询嵌套-->
+    <resultMap id="CategoryResult" type="Category">
+        <id column="cid" property="id"/>
+        <result column="cname" property="name"/>
+        <result column="cdescription" property="description"/>
+        <result column="parent_id" property="parentId"/>
+    </resultMap>
+
+
+</mapper>

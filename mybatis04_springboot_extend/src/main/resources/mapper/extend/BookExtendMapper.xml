@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--suppress MybatisXMapperXmlInspection -->
+<mapper namespace="com.hlmove.mybatis04.mapper.extend.BookExtendMapper">
+    <cache/>
+    <!-- 基础方式，一对一映射【了解，以后不用】 -->
+    <resultMap id="BookWithCategoryResult1" type="bookExtend">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="cover" property="cover"/>
+        <result column="description" property="description"/>
+        <result column="author" property="author"/>
+        <result column="publisher" property="publisher"/>
+        <result column="price" property="price"/>
+        <result column="store_num" property="storeNum"/>
+        <result column="status" property="status"/>
+        <result column="category_id" property="categoryId"/>
+        <!-- 类别信息映射 -->
+        <result column="id" property="category.id"/>
+        <result column="name" property="category.name"/>
+        <result column="description"
+                property="category.description"/>
+        <result column="parent_id"
+                property="category.parentId"/>
+    </resultMap>
+    <select id="findById01"
+            resultMap="BookWithCategoryResult1">
+        select eb.*,
+               ec.id,
+               ec.name,
+               ec.description,
+               ec.parent_id
+        from es_book eb,
+             es_category ec
+        where eb.category_id = ec.id
+          and eb.id = #{bid}
+    </select>
+    <!-- 上述重名导致映射出差，问题解决 -->
+    <resultMap id="BookWithCategoryResult2" type="BookExtend">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="cover" property="cover"/>
+        <result column="description" property="description"/>
+        <result column="author" property="author"/>
+        <result column="publisher" property="publisher"/>
+        <result column="price" property="price"/>
+        <result column="store_num" property="storeNum"/>
+        <result column="status" property="status"/>
+        <result column="category_id" property="categoryId"/>
+        <!-- 类别信息映射，不推荐，过于繁琐 -->
+        <result column="cid" property="category.id"/>
+        <result column="cname" property="category.name"/>
+        <result column="cdescription" property="category.description"/>
+        <result column="parent_id" property="category.parentId"/>
+    </resultMap>
+
+    <select id="findById02" resultMap="BookWithCategoryResult2">
+        select eb.*,
+               ec.id          cid,
+               ec.name        cname,
+               ec.description cdescription,
+               ec.parent_id
+        from es_book eb,
+             es_category ec
+        where eb.category_id = ec.id
+          and eb.id = #{bid}
+    </select>
+
+    <!-- 通过继承，对上述代码进行简化 -->
+    <resultMap id="BookWithCategoryResult3" type="BookExtend"
+               extends="com.hlmove.mybatis04.mapper.BookMapper.BaseBookResult">
+        <!-- 类别信息映射 -->
+        <result column="cid" property="category.id"/>
+        <result column="cname" property="category.name"/>
+        <result column="cdescription"
+                property="category.description"/>
+        <result column="parent_id" property="category.parentId"/>
+    </resultMap>
+    <select id="findById03" resultMap="BookWithCategoryResult3">
+        select eb.*,
+               ec.id          cid,
+               ec.name        cname,
+               ec.description cdescription,
+               ec.parent_id
+        from es_book eb,
+             es_category ec
+        where eb.category_id = ec.id
+          and eb.id = #{bid}
+    </select>
+    <!-- 一对一 嵌套结果映射【重要，实际开发使用的最终方案】 -->
+    <resultMap id="BookWithCategoryResult4" type="BookExtend"
+               extends="com.hlmove.mybatis04.mapper.BookMapper.BaseBookResult">
+        <!-- 一对一 类别信息映射 -->
+        <association property="category"
+                     resultMap="com.hlmove.mybatis04.mapper.CategoryMapper.CategoryResult"/>
+    </resultMap>
+
+    <select id="findById04" resultMap="BookWithCategoryResult4">
+        select eb.*,
+               ec.id          cid,
+               ec.name        cname,
+               ec.description cdescription,
+               ec.parent_id
+        from es_book eb,
+             es_category ec
+        where eb.category_id = ec.id
+          and eb.id = #{bid}
+    </select>
+
+
+    <!-- 一对一 嵌套结果查询【重要，实际开发普遍使用】 -->
+    <resultMap id="BookWithCategoryResult5" type="BookExtend"
+               extends="com.hlmove.mybatis04.mapper.BookMapper.BaseBookResult">
+        <!-- 类别信息映射 -->
+        <association property="category" column="category_id"
+                     select="com.hlmove.mybatis04.mapper.CategoryMapper.findById3"/>
+    </resultMap>
+    <select id="findById05" resultMap="BookWithCategoryResult5">
+        select *
+        from es_book
+        where id = #{bid}
+    </select>
+</mapper>

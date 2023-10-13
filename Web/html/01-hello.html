@@ -1,10 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" sizes="any" mask href="https://www.baidu.com/favicon.ico">
 </head>
+
 <body>
-<h1>hello</h1>
+<div>
+    <form name="User"
+          method="post" enctype="multipart/form-data">
+        <label for="username">用户名:
+        </label>
+        <input type="text" id="username" name="username" required/><br>
+        <label>
+            密码:
+            <input type="password" name="password" readonly placeholder="6-9位"/>
+        </label><br/>
+        <label>
+            文件
+            <input type="file" name="file"/>
+        </label><br/>
+        <label>
+            生日
+            <input type="date" name="birthday"/>
+        </label><br/>
+        <label>
+            颜色
+            <input type="color" name="color"/>
+        </label><br/>
+        <label>
+            邮箱
+            <input type="email" name="email" autocomplete="off"/>
+        </label><br/>
+        单选框
+        <label>
+            男
+            <input type="radio" name="gender" checked/>
+        </label>
+        <label>
+            女
+            <input type="radio" name="gender"/>
+        </label><br/>
+        技能
+        <label>
+            <input type="checkbox" name="can"/>
+            mysql
+        </label>
+        <label>
+            <input type="checkbox" name="can" checked/>
+            corejava
+        </label>
+        <label>
+            <input type="checkbox" name="can"/>
+            html
+        </label>
+        <label>
+            <input type="checkbox" name="can"/>
+            css
+        </label><br/>
+        <!-- 隐藏 -->
+        <input type="hidden" value="1" name="id"/><br/>
+        <label>
+            <select>
+                <option value="a1">测试选项1</option>
+                <option value="b3">测试选项2</option>
+                <option value="c3">测试选项3</option>
+            </select>
+        </label><br/><br/>
+
+        自我描述<br/>
+        <label>
+<textarea rows="5" cols="20" placeholder="请输入自我描述"></textarea>
+        </label><br/>
+        <iframe width="300" height="50" frameborder="0" scrolling="no" hspace="0"
+                src="https://i.tianqi.com/?c=code"></iframe>
+        <br/>
+        <input type="submit" value="提交"/>
+        <input type="reset" value="重置"/><br/>
+        <button type="submit">按钮测试提交</button>
+        <button type="reset">按钮测试重置</button>
+    </form>
+</div>
+
+
 </body>
+
 </html>

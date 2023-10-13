@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    var s = "hello world";
+
+    //获得字符串的长度
+    console.log(s.length); // 没有()
+
+    //从下标为3的位置开始,截取4个字符,包括下标为3的位置的字符
+    console.log(s.substr(3,4));
+
+    //从下标为6的位置开始截取,截取到下标为8的位置,但是不包括下标为8的字符[6,8)
+    console.log(s.substring(6,8));
+
+    //trim()去掉字符串俩边的空格,但是这个方法有可能浏览器不支持.
+    console.log(s.trim().length);
+
+    //字符串转换为大写
+    console.log(s.toUpperCase());
+
+    //字符串转换为小写
+    console.log(s.toLowerCase());
+
+    //分割字符串 返回一个数组
+    console.log(s.split(" "));
+    console.log(s.split(" ").length);
+    console.log(s.split(" ")[0]);
+    console.log(s.split(" ")[1]);
+
+    console.log(String()); // 查看该字符串类型信息
+
+</script>
+</html>

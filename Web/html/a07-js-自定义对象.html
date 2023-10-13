@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    class Person {
+        //构造器 形参只写名字
+        constructor(id, name, age) {
+            //局部变量->成员变量
+            this.id = id; //没有成员变量会自动加成员变量
+            this.name = name;
+            this.age = age;
+        }
+
+    }
+
+    let person = new Person(1, "jack", 22);
+    console.log(person);
+    const user = {
+        id: 1,
+        name: "tom",
+        age: 22
+    };
+    console.log(user);
+</script>
+</html>

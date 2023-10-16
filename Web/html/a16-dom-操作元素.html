@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<div id="dd"></div>
+
+
+<input id="username" type="text" value=""><br/>
+<img id="img" alt="图片加载错误"><br/>
+<span id="span">干净的元素</span>
+<a href="https://www.baidu.com" id="a" target="_blank">超链接</a>
+<button id="btn" onclick="alert('hello')">点击</button>
+</body>
+
+<script type="text/javascript">
+    //获取div并设置内容
+    let dd = document.getElementById("dd");
+    // dd.innerText =  "hello world";
+    dd.innerHTML = "<div style='color: red'>hello world</div>";
+    console.log(dd)
+    //获取input并设置内容
+    let userInput = document.getElementById("username");
+    userInput.value = "js设置的值";
+    //获取img的内容
+    let img = document.getElementById("img");
+    img.src = "../image/DJ.png";
+    img.style.height = "500px";
+    img.style.width = "500px";
+    //获取span的内容
+    let span = document.getElementById("span");
+    span.style.color = "red"
+    //添加事件 绑定事件
+    dd.onclick = () => {
+        alert("绑定事件")
+    }
+    document.getElementById("a").onclick = function () {
+        alert("超链接绑定")
+    }
+    //覆盖
+    // document.getElementById("btn").onclick = function () {
+    //     console.log("js绑定")
+    // }
+    //追加
+    document.getElementById("btn").addEventListener("click",function(){
+        console.log("js事件"); // 添加一个事件
+    });
+</script>
+</html>

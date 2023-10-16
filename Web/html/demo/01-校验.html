@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    function checkName(){
+        //获取输入框的值
+        let value = document.userForm.username.value;
+        console.log(value)
+        if (!value.trim()){//false
+            confirm("不能是空字符串!")
+            return false;
+        }
+    }
+</script>
+<body>
+<form action="#" name="userForm" onsubmit="return checkName();">
+    <label>
+        用户名:
+        <input type="text" name="username" onblur="checkName();">
+    </label><br>
+    <input type="submit" value="注册">
+
+</form>
+</body>
+</html>

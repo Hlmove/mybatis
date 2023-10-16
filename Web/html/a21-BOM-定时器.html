@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<script type="text/javascript">
+    window.onload = function () {
+        let s = document.getElementById("s");
+        let old = s.innerText;
+        let interval = window.setInterval(function () {
+            old--;
+            s.innerText = old;
+            if (old == 0) {
+                window.clearInterval(interval);
+                window.location.href = "https://www.baidu.com"
+            }
+        },1000);
+    }
+    window.setTimeout(function (){
+        window.confirm("这是一个广告")
+    },5000)
+</script>
+<body>
+<span id="s">10</span>秒后自动跳转
+</body>
+
+</html>

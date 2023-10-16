@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<script type="text/javascript">
+    //onload装载函数
+    window.onload = function () {
+        let username = document.getElementById("username");
+        username.value = "js"
+        //离焦事件
+        username.onblur = function () {
+            alert("确定？")
+        }
+        let btn = document.getElementById("btn");
+
+    }
+    function test(event){
+        console.log(event);
+    }
+</script>
+<body>
+<input id="username"/>
+<button id="btn" onkeydown="test(event)">点击</button>
+</body>
+
+</html>

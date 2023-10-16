@@ -8,8 +8,23 @@
     function hello1() {
         console.log("hello1")
     }
+    function hello2(a){
+        console.log(a)
+    }
+
+    const person = {
+        id: 1,
+        "name": "jack",
+        hello: function () {
+            console.log(this.name)
+        }
+    };
+    person.hello();
 </script>
 <body>
 <button onclick="hello1()">点击</button>
+<button onclick="hello2('hello2')">点击</button>
+<!--this代表当前对象-->
+<button onclick="hello2(this.textContent)">点击</button>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<button id="b1">button</button>
+<hr/>
+<span class="s1">s1</span>
+<span class="s1">s2</span>
+<hr/>
+<p name="p1">p1</p>
+<p name="p1">p2</p>
+<hr/>
+<div>div1</div>
+<div>div2</div>
+
+</body>
+<script type="text/javascript">
+    /* 选择器 使用js操作html之前 先选中该元素 */
+    // 根据id获取 btn是button的元素的具体对象
+    const btn = document.getElementById("b1");
+    console.log(btn);
+    console.log(btn.innerText) //获取标签中的内容
+    //根据name获取
+    let p1s = document.getElementsByName("p1");
+    console.log(p1s)
+    console.log(p1s[0].innerText)
+    //根据class获取
+    let s1s = document.getElementsByClassName("s1");
+    console.log(s1s)
+    console.log(s1s[0].innerText)
+    //根据标签获取
+    let ds = document.getElementsByTagName("div");
+    console.log(ds)
+    console.log(ds[0].innerText)
+</script>
+</html>

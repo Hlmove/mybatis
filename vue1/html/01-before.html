@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    输入框1：<input type="text" value="" id="val1" onkeyup="changeVal2(this.value)"/><br/>
+    输入框2：<input type="text" value="" id="val2" onkeyup="changeVal1(this.value)"/><br/>
+
+</div>
+<script>
+    function changeVal1(value) {
+        document.getElementById('val1').value = value
+    }
+
+    function changeVal2(value) {
+        document.getElementById('val2').value = value
+    }
+</script>
+</body>
+</html>

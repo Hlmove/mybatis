@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>demo1_vue_desc</title>
+</head>
+<body>
+<div id="app">
+    <input type="text" value="" id="val" onkeyup="changeVal(this.value)"/><br/>
+    输入框中的内容：<span id="msg">hello</span><br/>
+</div>
+<script>
+    const app = {
+        'val': "hello"
+    };  // app对象
+    // 输入框的值 设置为 对象app的值
+    var valInput = document.getElementById('val').value = app.val
+
+    const handler = {
+        // 目标对象，属性key
+        get(target, prop) {
+            console.log("==get===hello====,", target[prop])
+            return target[prop]
+        },
+        // 目标对象 属性key 属性value
+        set(target, prop, value) {
+            console.log("==set===hello====,", value)
+            target[prop] = value
+            document.getElementById('msg').innerHTML = value
+        }
+    }
+    // app就是含有val对象的值 handler就是触发监听的值
+    // app的值动了 handler的set方法就惠东
+    const appProxy = new Proxy(app, handler) // 原对象 代理对象
+    // 输入框的值改变
+    function changeVal(value) {
+        // app.val = value
+        appProxy.val = value   //調用set方法
+        console.log(appProxy.val) //调用get方法
+    }
+
+</script>
+</body>
+</html>

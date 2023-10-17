@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <!--vue.js  jquery.js layui.js-->
+        <script src="../js/vue.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<div id="app">
+    <input type="button" @click="changeId" value="点击我呀！"/>
+    <input type="button" v-on:click="changeId" value="点击！"/>
+    {{id}}
+</div>
+<script>
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            "id" : 100
+        },
+        methods:{
+            changeId(){
+                this.id++;
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

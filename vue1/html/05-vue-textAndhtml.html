@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <!--vue.js  jquery.js layui.js-->
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <span>{{message}}</span><br/>
+    <span v-text="message"></span><br/>
+    <span v-html="message"></span><br/>
+</div>
+<script>
+
+    // app对象中 val值发生改变 ， 监听器监听 做dom操作
+    // vue中date对象中message发生改变 v-model监听到 模型同步
+    // Vue 来自于vue.js中内置的对象 Proxy代理对象
+    const app = new Vue({
+        el: '#app',  // 代理哪个标签
+        data: { // 目标对象 app val: hello
+            "message": "<font color='red' size='medium'>今天天气真好！</font>"
+        }
+    })
+</script>
+</body>
+</html>

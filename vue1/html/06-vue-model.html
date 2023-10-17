@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+    <!--vue.js  jquery.js layui.js-->
+        <script src="../js/vue.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<div id="app">
+    <span v-text="user"></span><br/>
+    <form action="#">
+        <label>
+            用户名
+            <input type="text" v-model="user.username"/>
+        </label><br/>
+        <label>
+            密码
+            <input type="password" v-model="user.password"/>
+        </label><br/>
+        <label>
+            城市
+            <select v-model="user.city">
+                <option>昆山</option>
+                <option>苏州</option>
+                <option>镇江</option>
+            </select>
+        </label>
+    </form>
+</div>
+<script>
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+           user:{
+               "username": "tom",
+               "password": "123",
+               "city":"苏州"
+           }
+        }
+    })
+</script>
+</body>
+</html>

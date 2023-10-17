@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <!--vue.js  jquery.js layui.js-->
+    <script src="../js/vue.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<div id="app">
+   {{name}}
+</div>
+</body>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            "firstname": "John",
+            "lastname": "Smith"
+        },
+        method: {},
+        computed: {
+            name:  function () {
+                return this.firstname + this.lastname
+            }
+        }
+    })
+</script>
+</html>

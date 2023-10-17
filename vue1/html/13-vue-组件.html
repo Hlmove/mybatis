@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册组件</title>
+    <!--vue.js  jquery.js layui.js-->
+    <script src="../js/vue.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<div id="app">
+    <button-counter v-for="i in 5"></button-counter>
+</div>
+<script>
+    //Vue.component() 全局注册组件
+    Vue.component('button-counter', {
+        data: function () {    //组件也可以绑定属于自己的数据，将来也是一个vue实例，但是他的数据必须是使用data()函数返回的对象，这和new Vue()的时候绑定数据有区别
+            return {
+                count: 0
+            }
+        },
+        template: '<div><button v-on:click="count++">You clicked me {{ count }} times.</button></div>'  //组件包含的dom内容。
+    })
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        }
+    })
+</script>
+</body>
+</html>

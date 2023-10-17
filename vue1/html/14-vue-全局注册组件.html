@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局注册组件</title>
+    <!--vue.js  jquery.js layui.js-->
+    <script src="../js/vue.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<!--挂载标签-->
+<div id="app">
+    <!--复用组件-->
+    <my-comp></my-comp>
+    <my-comp></my-comp>
+</div>
+<script>
+    //注册组件
+    Vue.component("myComp", {
+        //组件内容
+        data: function () {
+            return{
+                count: 0
+            }
+        },
+        template: "<div style='color: #ff3737'@click='count++' >helloWorld+{{count}}</div>"
+    })
+    const app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello"
+        }
+    })
+</script>
+</body>
+</html>

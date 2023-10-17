@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>全局注册组件</title>
+    <!--vue.js  jquery.js layui.js-->
+    <script src="../js/vue.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<!--挂载标签-->
+<div id="app">
+    <!--复用组件-->
+    <my-temp></my-temp>
+    <my-temp></my-temp>
+</div>
+<template id="test">
+    <div>
+        <button @click="count++">点击+{{count}}</button>
+    </div>
+</template>
+<script>
+    //1.定义组件
+    const myTemp = {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '#test'
+    };
+    const app = new Vue({
+        el: "#app",
+        components: {
+            myTemp: myTemp
+        }
+
+    });
+</script>
+</body>
+</html>

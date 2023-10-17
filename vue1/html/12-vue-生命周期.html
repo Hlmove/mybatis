@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bind</title>
+    <!--vue.js  jquery.js layui.js-->
+    <script src="../js/vue.js"></script>
+    <!--    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>-->
+</head>
+<body>
+<div id="app">
+    <label>
+        <input type="text" v-model="message">
+    </label><br>
+    <span>{{message}} </span><br/>
+    <span v-bind:title="message">
+                鼠标悬停看消息
+            </span>
+</div>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!'
+        },
+        beforeCreate() {
+            console.log("Vue实例初始化后,事件配置之前  --- beforeCreate ---")
+            console.log("当前实例对象", this.message)
+            console.log("挂载目标：", this.$el)
+            console.log(" --- beforeCreate ---")
+        },
+        created() {
+            console.log(" ----- 创建后 ----- created ---")
+            console.log("当前实例对象", this.message)
+            console.log("挂载目标：", this.$el)
+            console.log(" ----- 创建后 ----- created ---")
+        },
+        beforeMount() {
+            console.log("---- 挂载前 ----- beforeMounted --- ")
+            console.log("挂载目标", this.$el)
+            console.log("---- 挂载前 ----- beforeMounted --- ")
+        },
+        mounted() {
+            console.log("---- 挂载后----- mounted --- ")
+            console.log("挂载目标", this.$el)
+            console.log("---- 挂载后 ----- mounted --- ")
+        },
+        beforeUpdate() {
+            console.log("---- 更新之前 ---- beforeUpdate ---")
+            console.log("数据：", this.message)
+            this.message = "beforeUpdate"
+            console.log("---- 更新之前 ---- beforeUpdate ---")
+        },
+        updated() {
+            console.log("---- 更新之前 ---- updated ---")
+            console.log("数据：", this.message)
+            console.log("---- 更新之前 ---- updated ---")
+        },
+        beforeDestory() {
+            console.log('---- beforeDestory.......')
+            console.log("--------销毁之前。。。。", this.message)
+            console.log('---- beforeDestory.......')
+        },
+        destroyed() {
+            console.log('---- destoryed.......')
+            console.log("--------销毁之后。。。。", this.message)
+            console.log('---- destoryed.......')
+        }
+    });
+</script>
+</body>
+</html>
